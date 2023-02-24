@@ -17,19 +17,14 @@ const InputField = styled(TextField)({
 });
 
 const Register = ({ theme }) => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleFirstNameChange = (event) => {
-    setFirstName(event.target.value);
-  };
-
-  const handleLastNameChange = (event) => {
-    setLastName(event.target.value);
+  const handlefullNameChange = (event) => {
+    setFullName(event.target.value);
   };
 
   const handleEmailChange = (event) => {
@@ -93,22 +88,13 @@ const Register = ({ theme }) => {
                     <Grid item xs={12}>
                       <InputField
                         fullWidth={true}
-                        label="First Name"
+                        label="Full Name"
                         variant="outlined"
-                        value={firstName}
-                        onChange={handleFirstNameChange}
+                        value={fullName}
+                        onChange={handlefullNameChange}
                       />
                     </Grid>
-                    <Grid item xs={12}>
-                      {" "}
-                      <InputField
-                        fullWidth={true}
-                        label="Last Name"
-                        variant="outlined"
-                        value={lastName}
-                        onChange={handleLastNameChange}
-                      />
-                    </Grid>
+
                     <Grid item xs={12}>
                       <InputField
                         fullWidth={true}
