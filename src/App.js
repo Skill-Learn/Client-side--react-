@@ -1,10 +1,9 @@
-import logo from "./logo.svg";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "./App.css";
+import "./assets/styles/App.css";
 import "./components/Login";
 import Login from "./components/Login";
 import { ThemeProvider } from "@mui/material/styles";
-import { theme } from "./styles/palette";
+import { theme } from "./assets/styles/palette";
 import Register from "./components/Register";
 
 function App() {

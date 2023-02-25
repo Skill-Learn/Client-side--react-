@@ -76,14 +76,17 @@ client/
 │ └── ...
 ├── src/
 │ ├── components/
-│ │ ├── App.js
-│ │ ├── Login.js
-│ │ ├── Registration.js
-│ │ ├── UserProfile.js
-│ │ ├── AdminDashboard.js
-│ │ ├── CreatorDashboard.js
-│ │ ├── LearnerDashboard.js
-│ │ ├── ReviewerDashboard.js
+│ │ ├── common/
+│ │ │ ├── Logo.jsx
+│ │ │ └── SubmitButton.jsx
+│ │ ├── App.jsx
+│ │ ├── Login.jsx
+│ │ ├── Registration.jsx
+│ │ ├── UserProfile.jsx
+│ │ ├── AdminDashboard.jsx
+│ │ ├── CreatorDashboard.jsx
+│ │ ├── LearnerDashboard.jsx
+│ │ ├── ReviewerDashboard.jsx
 │ │ └── ...
 │ ├── config/
 │ │ ├── config.js

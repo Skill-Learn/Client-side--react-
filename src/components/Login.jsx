@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { styled } from "@mui/material/styles";
 import {
   Card,
   CardActions,
@@ -8,15 +7,12 @@ import {
   Container,
   CardHeader,
   Typography,
-  TextField,
 } from "@mui/material";
 
-import { RenderLogo, SubmitButton } from "./common";
-const InputField = styled(TextField)({
-  marginBottom: "20px",
-});
+import { RenderLogo, SubmitButton, AuthInputField } from "./common";
 
 const Login = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -27,7 +23,9 @@ const Login = () => {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
-
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
     // handle form submission here
@@ -35,7 +33,19 @@ const Login = () => {
 
   return (
     <React.Fragment>
-      <Container>
+      <style>
+        {`
+          body {
+            background-image: url('https://source.unsplash.com/random/1920x1080');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+          }
+        `}
+      </style>
+      <Container
+        sx={{ height: "100vh", display: "flex", alignItems: "center" }}
+      >
         <Grid
           container
           direction={"column"}
@@ -51,6 +61,8 @@ const Login = () => {
                 borderWidth: 1.8,
                 borderRadius: 8,
                 p: 5,
+                backdropFilter: "blur(10px)",
+                backgroundColor: "rgba(255, 255, 255, 0.8)",
               }}
             >
               <CardHeader
@@ -70,24 +82,27 @@ const Login = () => {
               />
               <form onSubmit={handleSubmit}>
                 <CardContent>
-                  <InputField
-                    fullWidth={true}
+                  <AuthInputField
                     label="Username"
-                    variant="outlined"
+                    type="text"
                     value={username}
                     onChange={handleUsernameChange}
+                    autocomplete="username"
                   />
-                  <InputField
-                    fullWidth={true}
+                  <AuthInputField
                     label="Password"
-                    variant="outlined"
                     type="password"
                     value={password}
                     onChange={handlePasswordChange}
+                    showPassword={showPassword}
+                    handleClickShowPassword={handleClickShowPassword}
+                    autocomplete="current-password"
                   />
                 </CardContent>
                 <CardActions sx={{ justifyContent: "flex-end" }}>
-                  <SubmitButton type="submit">Log In</SubmitButton>
+                  <SubmitButton size="medium" type="submit">
+                    Log In
+                  </SubmitButton>
                 </CardActions>
               </form>
             </Card>
