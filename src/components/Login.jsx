@@ -6,15 +6,57 @@ import {
   Grid,
   Container,
   CardHeader,
-  Typography,
+  Tab,
+  Tabs,
+  IconButton,
 } from "@mui/material";
 
 import { RenderLogo, SubmitButton, AuthInputField } from "./common";
+import CloseIcon from "@mui/icons-material/Close";
 
-const Login = () => {
+const LoginForm = ({
+  onSubmit,
+  username,
+  password,
+  onUsernameChange,
+  onPasswordChange,
+  showPassword,
+  onShowPasswordClick,
+}) => {
+  return (
+    <form onSubmit={onSubmit}>
+      <CardContent>
+        <AuthInputField
+          label="Username"
+          type="text"
+          value={username}
+          onChange={onUsernameChange}
+          autocomplete="username"
+        />
+        <AuthInputField
+          label="Password"
+          type="password"
+          value={password}
+          onChange={onPasswordChange}
+          showPassword={showPassword}
+          handleClickShowPassword={onShowPasswordClick}
+          autocomplete="current-password"
+        />
+      </CardContent>
+      <CardActions sx={{ justifyContent: "flex-end" }}>
+        <SubmitButton size="medium" type="submit">
+          Log In
+        </SubmitButton>
+      </CardActions>
+    </form>
+  );
+};
+
+const Login = ({ onClose }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [selectedTab, setSelectedTab] = useState("creator");
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -23,6 +65,10 @@ const Login = () => {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
+  const handleTabChange = (event, newValue) => {
+    setSelectedTab(newValue);
+  };
+
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -33,16 +79,6 @@ const Login = () => {
 
   return (
     <React.Fragment>
-      <style>
-        {`
-          body {
-            background-image: url('https://source.unsplash.com/random/1920x1080');
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-          }
-        `}
-      </style>
       <Container
         sx={{ height: "100vh", display: "flex", alignItems: "center" }}
       >
@@ -66,45 +102,45 @@ const Login = () => {
               }}
             >
               <CardHeader
-                title={
-                  <Typography
-                    component="span"
-                    href="/"
-                    sx={{
-                      mr: 2,
-                      display: "flex",
-                      textDecoration: "none",
-                    }}
-                  >
-                    {RenderLogo(2.2)}
-                  </Typography>
+                title={RenderLogo(2)}
+                action={
+                  <IconButton onClick={onClose}>
+                    <CloseIcon />
+                  </IconButton>
                 }
               />
-              <form onSubmit={handleSubmit}>
-                <CardContent>
-                  <AuthInputField
-                    label="Username"
-                    type="text"
-                    value={username}
-                    onChange={handleUsernameChange}
-                    autocomplete="username"
-                  />
-                  <AuthInputField
-                    label="Password"
-                    type="password"
-                    value={password}
-                    onChange={handlePasswordChange}
-                    showPassword={showPassword}
-                    handleClickShowPassword={handleClickShowPassword}
-                    autocomplete="current-password"
-                  />
-                </CardContent>
-                <CardActions sx={{ justifyContent: "flex-end" }}>
-                  <SubmitButton size="medium" type="submit">
-                    Log In
-                  </SubmitButton>
-                </CardActions>
-              </form>
+              <Tabs
+                value={selectedTab}
+                variant="fullWidth"
+                onChange={handleTabChange}
+                textColor="secondary"
+                indicatorColor="secondary"
+              >
+                <Tab label="Creator" value="creator" />
+                <Tab label="Learner" value="learner" />
+              </Tabs>
+              {selectedTab === "creator" && (
+                <LoginForm
+                  onSubmit={handleSubmit}
+                  username={username}
+                  password={password}
+                  onUsernameChange={handleUsernameChange}
+                  onPasswordChange={handlePasswordChange}
+                  showPassword={showPassword}
+                  onShowPasswordClick={handleClickShowPassword}
+                />
+              )}
+              {selectedTab === "learner" && (
+                <LoginForm
+                  onSubmit={handleSubmit}
+                  username={username}
+                  password={password}
+                  onUsernameChange={handleUsernameChange}
+                  onPasswordChange={handlePasswordChange}
+                  showPassword={showPassword}
+                  onShowPasswordClick={handleClickShowPassword}
+                />
+              )}
             </Card>
           </Grid>
         </Grid>

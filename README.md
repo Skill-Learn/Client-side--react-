@@ -7,6 +7,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 In the project directory, you can run:
 
 ### `npm install`
+
 Before you run anything, remember to install all packages
 
 ### `npm start`
@@ -101,13 +102,16 @@ client/
 │ │ ├── currency.service.js
 │ │ └── ...
 │ ├── utils/
-│ │ ├── authHeader.js
+│ │ ├── auth.js
 │ │ ├── history.js
 │ │ └── ...
-│ ├── styles/
-│ │ └── palette.js
-│ ├── App.css
+│ ├──assets/
+│ │ ├── styles/
+│ │ │ ├── App.css
+│ │ │ └── palette.js
+│ │ └──images/
 │ ├── index.js
+│ ├── App.js
 │ └── ...
 ├── package.json
 ├── README.md

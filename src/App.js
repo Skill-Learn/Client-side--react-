@@ -1,10 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./assets/styles/App.css";
-import "./components/Login";
-import Login from "./components/Login";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./assets/styles/palette";
-import Register from "./components/Register";
+import { Navbar, LearnerDashboard } from "./components";
 
 function App() {
   return (
@@ -12,17 +10,15 @@ function App() {
       <div
         style={{
           display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
+          flexDirection: "column",
+          minHeight: "100vh",
         }}
         className="App"
       >
         <BrowserRouter>
+          <Navbar />
           <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+            <Route path="/" element={<LearnerDashboard />} />
           </Routes>
         </BrowserRouter>
       </div>

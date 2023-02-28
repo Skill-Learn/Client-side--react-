@@ -6,17 +6,99 @@ import {
   Grid,
   Container,
   CardHeader,
-  Typography,
+  Tabs,
+  Tab,
+  IconButton,
 } from "@mui/material";
 import { RenderLogo, SubmitButton, AuthInputField } from "./common";
+import CloseIcon from "@mui/icons-material/Close";
 
-const Register = ({ theme }) => {
+const RegisterForm = ({
+  onSubmit,
+  fullName,
+  email,
+  username,
+  password,
+  confirmPassword,
+  onFullNameChange,
+  onEmailChange,
+  onUsernameChange,
+  onPasswordChange,
+  onConfirmPasswordChange,
+  showPassword,
+  onShowPasswordClick,
+}) => {
+  return (
+    <form onSubmit={onSubmit}>
+      <CardContent>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <AuthInputField
+              label="Full Name"
+              type="text"
+              value={fullName}
+              onChange={onFullNameChange}
+              autocomplete="name"
+            />
+          </Grid>
+
+          <Grid item xs={12}>
+            <AuthInputField
+              label="Email"
+              type="email"
+              value={email}
+              onChange={onEmailChange}
+              autocomplete="email"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <AuthInputField
+              label="Username"
+              type="text"
+              value={username}
+              onChange={onUsernameChange}
+              autocomplete="username"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <AuthInputField
+              label="Password"
+              type="password"
+              value={password}
+              onChange={onPasswordChange}
+              showPassword={showPassword}
+              handleClickShowPassword={onShowPasswordClick}
+              autocomplete="new-password"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <AuthInputField
+              label="Confirm Password"
+              type="password"
+              value={confirmPassword}
+              onChange={onConfirmPasswordChange}
+              showPassword={showPassword}
+              handleClickShowPassword={onShowPasswordClick}
+              autocomplete="new-password"
+            />
+          </Grid>
+        </Grid>
+      </CardContent>
+      <CardActions sx={{ justifyContent: "flex-end" }}>
+        <SubmitButton type="submit">Sign Up</SubmitButton>
+      </CardActions>
+    </form>
+  );
+};
+
+const Register = ({ onClose, theme }) => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [selectedTab, setSelectedTab] = useState("creator");
 
   const handlefullNameChange = (event) => {
     setFullName(event.target.value);
@@ -37,6 +119,10 @@ const Register = ({ theme }) => {
   const handleConfirmPasswordChange = (event) => {
     setConfirmPassword(event.target.value);
   };
+  const handleTabChange = (event, newValue) => {
+    setSelectedTab(newValue);
+  };
+
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -47,16 +133,6 @@ const Register = ({ theme }) => {
 
   return (
     <React.Fragment>
-      <style>
-        {`
-          body {
-            background-image: url('https://source.unsplash.com/random/1920x1080');
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-          }
-        `}
-      </style>
       <Container
         sx={{ height: "100vh", display: "flex", alignItems: "center" }}
       >
@@ -80,79 +156,57 @@ const Register = ({ theme }) => {
               }}
             >
               <CardHeader
-                title={
-                  <Typography
-                    component="span"
-                    href="/"
-                    sx={{
-                      mr: 2,
-                      display: "flex",
-                      textDecoration: "none",
-                    }}
-                  >
-                    {RenderLogo(2.2)}
-                  </Typography>
+                title={RenderLogo(2)}
+                action={
+                  <IconButton onClick={onClose}>
+                    <CloseIcon />
+                  </IconButton>
                 }
               />
-              <form onSubmit={handleSubmit}>
-                <CardContent>
-                  <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                      <AuthInputField
-                        label="Full Name"
-                        type="text"
-                        value={fullName}
-                        onChange={handlefullNameChange}
-                        autocomplete="name"
-                      />
-                    </Grid>
-
-                    <Grid item xs={12}>
-                      <AuthInputField
-                        label="Email"
-                        type="email"
-                        value={email}
-                        onChange={handleEmailChange}
-                        autocomplete="email"
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <AuthInputField
-                        label="Username"
-                        type="text"
-                        value={username}
-                        onChange={handleUsernameChange}
-                        autocomplete="username"
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <AuthInputField
-                        label="Password"
-                        type="password"
-                        value={password}
-                        onChange={handlePasswordChange}
-                        showPassword={showPassword}
-                        handleClickShowPassword={handleClickShowPassword}
-                        autocomplete="new-password"
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <AuthInputField
-                        label="Confirm Password"
-                        type="password"
-                        value={confirmPassword}
-                        onChange={handleConfirmPasswordChange}
-                        showPassword={showPassword}
-                        handleClickShowPassword={handleClickShowPassword}
-                        autocomplete="new-password"
-                      />
-                    </Grid>
-                  </Grid>
-                </CardContent>
-                <CardActions sx={{ justifyContent: "flex-end" }}>
-                  <SubmitButton type="submit">Sign Up</SubmitButton>
-                </CardActions>
-              </form>
+              <Tabs
+                value={selectedTab}
+                variant="fullWidth"
+                onChange={handleTabChange}
+                textColor="secondary"
+                indicatorColor="secondary"
+              >
+                <Tab label="Creator" value="creator" />
+                <Tab label="Learner" value="learner" />
+              </Tabs>
+              {selectedTab === "creator" && (
+                <RegisterForm
+                  onSubmit={handleSubmit}
+                  fullName={fullName}
+                  email={email}
+                  username={username}
+                  password={password}
+                  confirmPassword={confirmPassword}
+                  onFullNameChange={handlefullNameChange}
+                  onEmailChange={handleEmailChange}
+                  onUsernameChange={handleUsernameChange}
+                  onPasswordChange={handlePasswordChange}
+                  onConfirmPasswordChange={handleConfirmPasswordChange}
+                  showPassword={showPassword}
+                  onShowPasswordClick={handleClickShowPassword}
+                />
+              )}
+              {selectedTab === "learner" && (
+                <RegisterForm
+                  onSubmit={handleSubmit}
+                  fullName={fullName}
+                  email={email}
+                  username={username}
+                  password={password}
+                  confirmPassword={confirmPassword}
+                  onFullNameChange={handlefullNameChange}
+                  onEmailChange={handleEmailChange}
+                  onUsernameChange={handleUsernameChange}
+                  onPasswordChange={handlePasswordChange}
+                  onConfirmPasswordChange={handleConfirmPasswordChange}
+                  showPassword={showPassword}
+                  onShowPasswordClick={handleClickShowPassword}
+                />
+              )}
             </Card>
           </Grid>
         </Grid>

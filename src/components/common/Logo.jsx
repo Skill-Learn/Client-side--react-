@@ -1,9 +1,17 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { Typography } from "@mui/material";
 
 const RenderLogo = (fontSize) => {
   return (
-    <Box>
+    <Typography
+      component="span"
+      href="/"
+      sx={{
+        mr: 2,
+        display: "flex",
+        textDecoration: "none",
+      }}
+    >
       <b
         style={{
           fontFamily: "'Calibri', sans-serif",
@@ -14,7 +22,7 @@ const RenderLogo = (fontSize) => {
       >
         Skill Learn
       </b>
-    </Box>
+    </Typography>
   );
 };
 

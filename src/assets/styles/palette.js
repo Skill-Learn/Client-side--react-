@@ -8,9 +8,9 @@ export const theme = createTheme({
       contrastText: "#FFFFFF",
     },
     secondary: {
-      main: "#F8D5A3", // a soft orange color
-      light: "#FBE4C4",
-      dark: "#CC9C4C",
+      main: "#BF6B3A", // a rich, warm brown
+      light: "#E6B891",
+      dark: "#8E461A",
       contrastText: "#333333",
     },
     error: {
@@ -40,6 +40,12 @@ export const theme = createTheme({
     common: {
       black: "#000000",
       white: "#FFFFFF",
+    },
+    white: {
+      main: "#FFFFFF",
+      light: "#FFFFFF",
+      dark: "#FFFFFF",
+      contrastText: "#FFFFFF",
     },
     text: {
       primary: "#333333",
