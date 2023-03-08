@@ -83,10 +83,12 @@ client/
 │ │ ├── common/
 │ │ │ ├── Logo.jsx
 │ │ │ └── SubmitButton.jsx
-│ │ ├── App.jsx
 │ │ ├── Login.jsx
 │ │ ├── Registration.jsx
+│ │ ├── NavBar.jsx
 │ │ ├── UserProfile.jsx
+│ │ └── ...
+│ ├── pages/
 │ │ ├── AdminDashboard.jsx
 │ │ ├── CreatorDashboard.jsx
 │ │ ├── LearnerDashboard.jsx

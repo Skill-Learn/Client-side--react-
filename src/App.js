@@ -2,7 +2,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./assets/styles/App.css";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./assets/styles/palette";
-import { Navbar, LearnerDashboard } from "./components";
+import { Navbar } from "./components";
+import { LearnerDashboard } from "./pages";
+import UserProfile from "./pages/ProfilePage";
 
 function App() {
   return (
@@ -17,8 +19,10 @@ function App() {
       >
         <BrowserRouter>
           <Navbar />
+
           <Routes>
             <Route path="/" element={<LearnerDashboard />} />
+            <Route path="/profile" element={<UserProfile />} />
           </Routes>
         </BrowserRouter>
       </div>

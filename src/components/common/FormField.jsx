@@ -15,9 +15,11 @@ const AuthInputField = ({
   showPassword,
   handleClickShowPassword,
   autocomplete,
+  disabled = false,
 }) => {
   return (
     <InputField
+      disabled={disabled}
       fullWidth
       label={label}
       variant="filled"

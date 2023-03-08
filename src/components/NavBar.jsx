@@ -14,12 +14,13 @@ import {
 import { isLoggedIn } from "../utils";
 
 import { Login, Register } from "./";
-import { RenderLogo } from "./common";
+import { RenderLogo, stringAvatar } from "./common";
 
 const Navbar = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  // eslint-disable-next-line
   const [openMenu, setOpenMenu] = useState(false);
 
   const handleMenu = (event) => {
@@ -71,6 +72,7 @@ const Navbar = () => {
           </Typography>
         </Link>
         {isLoggedIn() ? (
+          // {isLoggedIn() ? (
           <div>
             <IconButton
               size="large"
@@ -80,7 +82,10 @@ const Navbar = () => {
               onClick={handleMenu}
               color="inherit"
             >
-              <Avatar />
+              <Avatar
+                {...stringAvatar("User Name goes here")}
+                variant="rounded"
+              />
             </IconButton>
             <Menu
               anchorEl={anchorEl}
@@ -96,7 +101,9 @@ const Navbar = () => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
+              <MenuItem component={Link} to="/profile" onClick={handleClose}>
+                Profile
+              </MenuItem>
               <MenuItem onClick={handleClose}>Logout</MenuItem>
             </Menu>
           </div>
